@@ -9,7 +9,7 @@ function load(){try{const r=localStorage.getItem("cbeast_v5");if(!r)return def()
 function save(){if(!state.wallet)return;localStorage.setItem("cbeast_v5",JSON.stringify(state));localStorage.setItem("cbeast_v5_"+state.wallet,JSON.stringify(state))}
 function loadW(a){try{const r=localStorage.getItem("cbeast_v5_"+a);if(!r)return null;const s={...def(),...JSON.parse(r)};UPS.forEach(u=>u.apply(s,s.upgrades[u.id]||0));return s}catch{return null}}
 const tg=window.Telegram&&window.Telegram.WebApp;
-if(tg){document.body.classList.add("tg-webapp");try{tg.ready();tg.expand();tg.setHeaderColor("#0b0614");tg.setBackgroundColor("#0b0614");if(tg.HapticFeedback)window._haptic=()=>{try{tg.HapticFeedback.impactOccurred("light")}catch{}}}catch{}}
+if(tg){document.body.classList.add("tg-webapp");try{tg.ready();tg.expand();tg.setHeaderColor("#0c0f14");tg.setBackgroundColor("#0c0f14");if(tg.HapticFeedback)window._haptic=()=>{try{tg.HapticFeedback.impactOccurred("light")}catch{}}}catch{}}
 window._haptic=window._haptic||(()=>{});
 const $=s=>document.querySelector(s),$$=s=>document.querySelectorAll(s);
 function toast(m){const e=$("#toast");e.textContent=m;e.classList.remove("hidden");clearTimeout(e._t);e._t=setTimeout(()=>e.classList.add("hidden"),2400)}
@@ -68,8 +68,8 @@ function pickWallet(){
 }
 async function disconnect(){const L=providers();const m=L.find(x=>x.id===state.walletProvider)||L[0];try{await m?.p?.disconnect?.()}catch{}state.wallet=null;state.walletProvider=null;render();toast("Disconnected")}
 
-$$(".nav-item").forEach(b=>b.onclick=()=>{$$(".nav-item").forEach(x=>x.classList.remove("active"));b.classList.add("active");$$(".screen").forEach(s=>s.classList.remove("active"));$("#screen-"+b.dataset.screen).classList.add("active");window._haptic()});
-$("#walletChip")&&($("#walletChip").onclick=()=>{$$(".nav-item").forEach(x=>x.classList.remove("active"));$$('.nav-item[data-screen="wallet"]')[0]?.classList.add("active");$$(".screen").forEach(s=>s.classList.remove("active"));$("#screen-wallet").classList.add("active")});
+$$(".dock-item").forEach(b=>b.onclick=()=>{$$(".dock-item").forEach(x=>x.classList.remove("active"));b.classList.add("active");$$(".view").forEach(s=>s.classList.remove("active"));$("#screen-"+b.dataset.screen).classList.add("active");window._haptic()});
+$("#walletChip")&&($("#walletChip").onclick=()=>{$$(".dock-item").forEach(x=>x.classList.remove("active"));$$('.dock-item[data-screen="wallet"]')[0]?.classList.add("active");$$(".view").forEach(s=>s.classList.remove("active"));$("#screen-wallet").classList.add("active")});
 
 function render(){
   if($("#app").classList.contains("hidden"))return;
@@ -78,7 +78,7 @@ function render(){
   $("#ratePill").textContent=" "+fmt(state.perHour)+" BP/hr";
   const mx=Date.now()<state.megaFlexUntil;
   $("#miningStatus").textContent=mx?" 2x Mega Flex":" Mining";
-  $("#miningStatus").style.color=mx?"var(--orange)":"var(--green)";
+  $("#miningStatus").style.color=mx?"var(--coral)":"var(--mint)";
   $("#tapPower").textContent="+"+state.tapPower;
   $("#staminaText").textContent=fmt(state.stamina);
   $("#streak").textContent=state.streak;
@@ -89,7 +89,7 @@ function render(){
   $("#staminaFull").textContent=fmt(state.stamina)+" / "+fmt(state.maxStamina);
   $("#staminaBar").style.width=state.stamina/state.maxStamina*100+"%";
   const pa=passive();$("#passiveBP").textContent=fmt(pa)+" BP ready";$("#passiveBar").style.width=Math.min(100,pa/(state.perHour*8)*100)+"%";$("#collectBtn").disabled=pa<1;
-  $("#upgradesGrid").innerHTML=UPS.map(u=>{const l=state.upgrades[u.id]||0,cost=Math.floor(u.base*Math.pow(1.6,l));return`<div class="upgrade-card"><div class="upgrade-top"><span class="upgrade-name">${u.name}</span><span class="upgrade-lvl">LVL ${l+1}</span></div><p class="upgrade-desc">${u.desc}</p><p class="upgrade-effect">${u.effect(l)}</p><button class="btn btn-primary full" data-u="${u.id}" ${!c||state.bp<cost?"disabled":""}>${!c?"Connect wallet":"Upgrade · "+fmt(cost)+" BP"}</button></div>`}).join("");
+  $("#upgradesGrid").innerHTML=UPS.map(u=>{const l=state.upgrades[u.id]||0,cost=Math.floor(u.base*Math.pow(1.6,l));return`<div class="upgrade"><div class="upgrade-top"><span class="upgrade-name">${u.name}</span><span class="upgrade-lvl">LVL ${l+1}</span></div><p class="upgrade-desc">${u.desc}</p><p class="upgrade-effect">${u.effect(l)}</p><button class="btn wide" data-u="${u.id}" ${!c||state.bp<cost?"disabled":""}>${!c?"Connect wallet":"Upgrade · "+fmt(cost)+" BP"}</button></div>`}).join("");
   $("#upgradesGrid").querySelectorAll("[data-u]").forEach(b=>b.onclick=()=>{if(!c){pickWallet();return}buy(b.dataset.u)});
   const mf=$("#megaFlexBtn");
   if(Date.now()<state.megaFlexUntil){mf.textContent=Math.ceil((state.megaFlexUntil-Date.now())/1e3)+"s";mf.disabled=true}
@@ -101,7 +101,7 @@ function render(){
   $("#refCode").textContent=c?(state.refCode||short(state.wallet)):"Connect wallet";
   $("#friendCount").textContent=state.friends;$("#refEarned").textContent=fmt(state.refEarned)+" BP";
   $("#copyRef").disabled=!$("#shareRef").disabled=!c;
-  $("#walletStatus").innerHTML=c?`<span class="dot on"></span><span>${short(state.wallet)} · ${state.walletProvider||"wallet"}</span>`:`<span class="dot off"></span><span>Not connected</span>`;
+  $("#walletStatus").innerHTML=c?`<i class="dot on"></i> ${short(state.wallet)} · ${state.walletProvider||"wallet"}`:`<i class="dot off"></i> Not connected`;
   const cb=$("#connectWalletBtn"),db=$("#disconnectWalletBtn");
   if(c){cb.classList.add("hidden");db?.classList.remove("hidden")}else{cb.classList.remove("hidden");cb.textContent="Connect Phantom / Solflare";db?.classList.add("hidden")}
   const cl=state.bp/BP_PER_COIN;
@@ -109,7 +109,7 @@ function render(){
   if($("#claimedTotal"))$("#claimedTotal").textContent=fmt(state.claimedCoins||0);
   const claimBtn=$("#claimCoinBtn");
   if(claimBtn){claimBtn.disabled=!c||cl<MIN_CLAIM;claimBtn.textContent=!c?"Connect wallet to claim":cl<MIN_CLAIM?"Mine more BP":"Claim "+cl.toFixed(2)+" $CBEAST"}
-  $("#detailRank").textContent=rk.name;$("#detailMined").textContent=fmt(state.totalMined)+" BP";$("#detailUser").textContent=c?short(state.wallet):"Not signed in";
+  $("#detailRank").textContent=rk.name;$("#detailMined").textContent=fmt(state.totalMined)+" BP";$("#detailUser").textContent=c?short(state.wallet):"—";
   if($("#walletChip"))$("#walletChip").textContent=c?"OK":"◎";
   $("#onlineCount").textContent=(1200+Math.floor(Math.sin(Date.now()/6e4)*80)+Math.floor(Math.random()*20)).toLocaleString();
 }
