@@ -29,7 +29,8 @@
       </div>
       <div class="chips">
         <span class="chip">Mainnet</span>
-        <a class="chip ghost" href="https://t.me/chickenbeastbot" target="_blank" rel="noopener">Telegram</a>
+        <a class="chip ghost" href="https://t.me/chickenbeastbot" target="_blank" rel="noopener">Bot</a>
+        <a class="chip ghost" href="https://t.me/+sndtBvs3zHNkMGJk" target="_blank" rel="noopener">Channel</a>
       </div>
     </header>
 
@@ -138,7 +139,7 @@
 
       <section class="view" id="screen-friends">
         <h2 class="view-title">Coop</h2>
-        <p class="view-sub">10% of friends’ taps.</p>
+        <p class="view-sub">Referrals · leaderboard · community</p>
         <div class="panel center">
           <p class="score-label">Referral</p>
           <div class="ref" id="refCode">Connect wallet</div>
@@ -151,6 +152,21 @@
           <div class="tile tall"><span>Friends</span><strong id="friendCount">0</strong></div>
           <div class="tile tall"><span>Earned</span><strong id="refEarned">0 BP</strong></div>
         </div>
+        <div class="panel">
+          <div class="panel-row"><span>📢 Channel</span><span class="tag soft">Official</span></div>
+          <p class="view-sub tight">News, drops, and coop updates.</p>
+          <a class="btn wide" id="joinChannel" href="https://t.me/+sndtBvs3zHNkMGJk" target="_blank" rel="noopener" style="text-align:center;text-decoration:none;display:block;line-height:1.2;padding-top:13px">Join Chicken Beast</a>
+        </div>
+        <h3 class="board-title">Leaderboard</h3>
+        <p class="view-sub tight">Season 1 · total mined BP</p>
+        <div class="panel board-you" id="boardYou">
+          <div class="lb-row you">
+            <span class="lb-pos" id="youPos">—</span>
+            <span class="lb-name" id="youName">You</span>
+            <span class="lb-bp" id="youBp">0</span>
+          </div>
+        </div>
+        <div class="board" id="leaderboard"></div>
       </section>
 
       <section class="view" id="screen-wallet">
