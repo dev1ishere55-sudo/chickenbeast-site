@@ -1,1 +1,0 @@
-import{r as e}from"./dist-D5-m4J9H.js";import{t}from"./community-Dq2ZZsv3.js";var n=e(),r=()=>(0,n.jsx)(t,{mode:`clans`});export{r as component};
