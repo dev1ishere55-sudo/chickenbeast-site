@@ -4,8 +4,8 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, viewport-fit=cover" />
   <title>CHICKENBEAST — Too Jacked To Rug</title>
-  <meta name="description" content="Tap. Flex. Hatch gains. Connect Phantom or Solflare." />
-  <meta name="theme-color" content="#070708" />
+  <meta name="description" content="Tap. Flex. Hatch gains. Connect Phantom or Solflare on Solana mainnet." />
+  <meta name="theme-color" content="#0b0614" />
   <script src="https://telegram.org/js/telegram-web-app.js"></script>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -14,7 +14,53 @@
   <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🐔</text></svg>" />
 </head>
 <body>
-  <div id="app">
+  <div id="landing" class="landing">
+    <header class="l-header">
+      <div class="l-brand">
+        <span class="l-logo">🐔</span>
+        <div>
+          <div class="l-name">CHICKEN<span>BEAST</span></div>
+          <div class="l-tag">MINER</div>
+        </div>
+      </div>
+      <div class="l-pills">
+        <span class="pill gold">Mainnet</span>
+        <a class="pill" href="https://t.me/chickenbeastbot" target="_blank" rel="noopener">Telegram</a>
+      </div>
+    </header>
+
+    <div class="l-hero">
+      <div class="hero-glow"></div>
+      <img src="chickenbeast.jpg" alt="ChickenBeast" class="hero-img" draggable="false" />
+    </div>
+
+    <p class="l-meta">SOLANA · $CBEAST · SEASON 1</p>
+    <h1 class="l-title">TOO JACKED<br/><span>TO RUG.</span></h1>
+    <p class="l-copy">
+      The gym never closed. Stack Beast Points, flex upgrades, claim $CBEAST.
+      Connect your wallet and join the coop.
+    </p>
+
+    <div class="l-actions">
+      <button class="btn-wallet phantom" id="btnPhantom">
+        <span class="ico">👻</span> Open in Phantom
+      </button>
+      <button class="btn-wallet solflare" id="btnSolflare">
+        <span class="ico">🔆</span> Open in Solflare
+      </button>
+      <p class="l-safe">Approve sign-in in your wallet. No fees. We never ask for your seed.</p>
+      <a class="btn-outline" href="https://t.me/chickenbeastbot" target="_blank" rel="noopener">💬 JOIN TELEGRAM</a>
+      <button class="btn-outline soft" id="btnEnterApp">⛏ ENTER THE GYM</button>
+    </div>
+
+    <div class="l-stats">
+      <div class="ls"><span class="ls-ico">⏱</span><strong>8H</strong><em>mining sessions</em></div>
+      <div class="ls"><span class="ls-ico">👆</span><strong>TAP</strong><em>for bonus pts</em></div>
+      <div class="ls"><span class="ls-ico">🐥</span><strong>+10%</strong><em>from your frens</em></div>
+    </div>
+  </div>
+
+  <div id="app" class="app hidden">
     <header class="topbar">
       <div class="brand">
         <span class="logo">🐔</span>
@@ -28,11 +74,6 @@
 
     <main class="screens">
       <section class="screen active" id="screen-home">
-        <div class="auth-banner" id="authBanner">
-          <span>Connect wallet to save gains</span>
-          <button class="btn btn-sm btn-primary" id="authConnectBtn">Phantom / Solflare</button>
-        </div>
-
         <div class="balance-card">
           <div class="balance-label">BEAST POINTS</div>
           <div class="balance-value" id="bpDisplay">0</div>
@@ -41,7 +82,6 @@
             <span class="rate-pill soft" id="miningStatus">● Mining</span>
           </div>
         </div>
-
         <div class="chicken-stage">
           <div class="chicken-wrap" id="tapArea">
             <img src="chickenbeast.jpg" alt="ChickenBeast" class="chicken-img" draggable="false" />
@@ -50,60 +90,34 @@
           </div>
           <p class="tap-hint">TAP TO FLEX</p>
         </div>
-
         <div class="stat-row">
-          <div class="mini-stat">
-            <span class="ms-label">TAP</span>
-            <span class="ms-val" id="tapPower">+1</span>
-          </div>
-          <div class="mini-stat">
-            <span class="ms-label">STAMINA</span>
-            <span class="ms-val" id="staminaText">1000</span>
-          </div>
-          <div class="mini-stat">
-            <span class="ms-label">RANK</span>
-            <span class="ms-val" id="rankName">Scrawny</span>
-          </div>
-          <div class="mini-stat">
-            <span class="ms-label">STREAK</span>
-            <span class="ms-val" id="streak">0</span>
-          </div>
+          <div class="mini-stat"><span class="ms-label">TAP</span><span class="ms-val" id="tapPower">+1</span></div>
+          <div class="mini-stat"><span class="ms-label">STAMINA</span><span class="ms-val" id="staminaText">1000</span></div>
+          <div class="mini-stat"><span class="ms-label">RANK</span><span class="ms-val" id="rankName">Scrawny</span></div>
+          <div class="mini-stat"><span class="ms-label">STREAK</span><span class="ms-val" id="streak">0</span></div>
         </div>
-
         <div class="progress-card">
-          <div class="pc-head">
-            <span id="rankFull">Scrawny Chick</span>
-            <span id="rankProgress">0 / 10,000</span>
-          </div>
+          <div class="pc-head"><span id="rankFull">Scrawny Chick</span><span id="rankProgress">0 / 10,000</span></div>
           <div class="bar"><div class="bar-fill" id="rankBar" style="width:0%"></div></div>
           <div class="pc-sub">Next: <span id="nextRank">Barnyard Broiler</span></div>
         </div>
-
         <div class="progress-card">
-          <div class="pc-head">
-            <span>PASSIVE INCUBATION</span>
-            <span class="badge">8H CAP</span>
-          </div>
+          <div class="pc-head"><span>PASSIVE INCUBATION</span><span class="badge">8H CAP</span></div>
           <div class="bar"><div class="bar-fill" id="passiveBar" style="width:0%"></div></div>
           <div class="pc-actions">
             <span id="passiveBP">0 BP ready</span>
             <button class="btn btn-sm btn-primary" id="collectBtn">Collect</button>
           </div>
         </div>
-
         <div class="progress-card">
-          <div class="pc-head">
-            <span>STAMINA TANK</span>
-            <span id="staminaFull">1,000 / 1,000</span>
-          </div>
+          <div class="pc-head"><span>STAMINA TANK</span><span id="staminaFull">1,000 / 1,000</span></div>
           <div class="bar bar-green"><div class="bar-fill" id="staminaBar" style="width:100%"></div></div>
         </div>
       </section>
 
       <section class="screen" id="screen-boosts">
         <h2 class="screen-title">SUPPLEMENT STACK</h2>
-        <p class="screen-sub">Upgrade your gains. Wallet required to buy.</p>
-
+        <p class="screen-sub">Upgrade gains. Wallet required.</p>
         <div class="boost-hero card">
           <div class="bh-left">
             <div class="bh-title">MEGA FLEX</div>
@@ -111,23 +125,17 @@
           </div>
           <button class="btn btn-primary" id="megaFlexBtn">350 BP</button>
         </div>
-
         <div id="upgradesGrid" class="upgrades-list"></div>
-
         <div class="card daily-card">
-          <div class="daily-head">
-            <span>🎁 Daily Cluck-in</span>
-            <span class="badge" id="dailyBadge">Ready</span>
-          </div>
-          <p class="muted">Claim free BP every 24h. Streak multiplies reward.</p>
+          <div class="daily-head"><span>🎁 Daily Cluck-in</span><span class="badge" id="dailyBadge">Ready</span></div>
+          <p class="muted">Claim free BP every 24h.</p>
           <button class="btn btn-primary full" id="dailyBtn">Claim daily · +50 BP</button>
         </div>
       </section>
 
       <section class="screen" id="screen-friends">
         <h2 class="screen-title">THE COOP</h2>
-        <p class="screen-sub">Invite friends. Earn 10% of their taps forever.</p>
-
+        <p class="screen-sub">Invite friends. Earn 10% of their taps.</p>
         <div class="card ref-card">
           <div class="ref-label">YOUR REFERRAL LINK</div>
           <div class="ref-code" id="refCode">Connect wallet</div>
@@ -136,42 +144,20 @@
             <button class="btn btn-ghost" id="shareRef">Share</button>
           </div>
         </div>
-
         <div class="stat-row twin">
-          <div class="mini-stat tall">
-            <span class="ms-label">FRIENDS</span>
-            <span class="ms-val" id="friendCount">0</span>
-          </div>
-          <div class="mini-stat tall">
-            <span class="ms-label">REF EARNED</span>
-            <span class="ms-val" id="refEarned">0 BP</span>
-          </div>
-        </div>
-
-        <div class="card">
-          <div class="list-title">How it works</div>
-          <ul class="howto">
-            <li>Connect Phantom or Solflare</li>
-            <li>Share your referral link</li>
-            <li>You get <strong>10%</strong> of their tap gains</li>
-            <li>No limit on invites</li>
-          </ul>
+          <div class="mini-stat tall"><span class="ms-label">FRIENDS</span><span class="ms-val" id="friendCount">0</span></div>
+          <div class="mini-stat tall"><span class="ms-label">REF EARNED</span><span class="ms-val" id="refEarned">0 BP</span></div>
         </div>
       </section>
 
       <section class="screen" id="screen-wallet">
         <h2 class="screen-title">WALLET</h2>
-        <p class="screen-sub">Sign in with Phantom or Solflare only</p>
-
+        <p class="screen-sub">Phantom or Solflare · Solana mainnet</p>
         <div class="card">
-          <div class="wallet-status" id="walletStatus">
-            <span class="dot off"></span>
-            <span>Not connected</span>
-          </div>
-          <button class="btn btn-primary full" id="connectWalletBtn">Connect Phantom / Solflare</button>
+          <div class="wallet-status" id="walletStatus"><span class="dot off"></span><span>Not connected</span></div>
+          <button class="btn btn-primary full" id="connectWalletBtn">Connect wallet</button>
           <button class="btn btn-ghost full hidden" id="disconnectWalletBtn" style="margin-top:10px">Disconnect</button>
         </div>
-
         <div class="card claim-card">
           <div class="list-title">Claim $CBEAST</div>
           <div class="claim-amount-wrap">
@@ -180,16 +166,10 @@
             <div class="claim-unit">$CBEAST</div>
           </div>
           <div class="stat-row twin" style="margin:12px 0">
-            <div class="mini-stat tall">
-              <span class="ms-label">RATE</span>
-              <span class="ms-val" style="font-size:14px">1K BP = 1</span>
-            </div>
-            <div class="mini-stat tall">
-              <span class="ms-label">CLAIMED</span>
-              <span class="ms-val" id="claimedTotal" style="font-size:14px">0</span>
-            </div>
+            <div class="mini-stat tall"><span class="ms-label">RATE</span><span class="ms-val" style="font-size:14px">1K BP = 1</span></div>
+            <div class="mini-stat tall"><span class="ms-label">CLAIMED</span><span class="ms-val" id="claimedTotal" style="font-size:14px">0</span></div>
           </div>
-          <p class="muted" id="claimHint">Mine BP, then claim coins to your connected wallet. Min claim: 0.1 $CBEAST.</p>
+          <p class="muted">Min claim 0.1 $CBEAST. Convert BP to coins.</p>
           <button class="btn btn-primary full" id="claimCoinBtn">Claim coins</button>
           <div class="ca-box" style="margin-top:14px">
             <span class="ca-label">$CBEAST CA</span>
@@ -197,8 +177,7 @@
             <button class="btn btn-sm btn-ghost" id="copyCa">Copy</button>
           </div>
         </div>
-
-        <div class="card gym-id">
+        <div class="card">
           <div class="list-title">Gym Card</div>
           <div class="id-row"><span>Rank</span><strong id="detailRank">Scrawny Chick</strong></div>
           <div class="id-row"><span>Total mined</span><strong id="detailMined">0 BP</strong></div>
@@ -208,22 +187,10 @@
     </main>
 
     <nav class="bottom-nav">
-      <button class="nav-item active" data-screen="home">
-        <span class="nav-icon">🏋️</span>
-        <span>Gym</span>
-      </button>
-      <button class="nav-item" data-screen="boosts">
-        <span class="nav-icon">💊</span>
-        <span>Boosts</span>
-      </button>
-      <button class="nav-item" data-screen="friends">
-        <span class="nav-icon">🐥</span>
-        <span>Friends</span>
-      </button>
-      <button class="nav-item" data-screen="wallet">
-        <span class="nav-icon">💼</span>
-        <span>Wallet</span>
-      </button>
+      <button class="nav-item active" data-screen="home"><span class="nav-icon">🏋️</span><span>Gym</span></button>
+      <button class="nav-item" data-screen="boosts"><span class="nav-icon">💊</span><span>Boosts</span></button>
+      <button class="nav-item" data-screen="friends"><span class="nav-icon">🐥</span><span>Friends</span></button>
+      <button class="nav-item" data-screen="wallet"><span class="nav-icon">💼</span><span>Wallet</span></button>
     </nav>
   </div>
 
