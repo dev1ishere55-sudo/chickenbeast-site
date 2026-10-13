@@ -22,13 +22,9 @@
   <div class="orb orb-a"></div>
   <div class="orb orb-b"></div>
   <canvas id="confetti" class="confetti-cv"></canvas>
-
   <div id="landing" class="landing">
     <header class="l-top">
-      <div class="mark">
-        <span class="mark-icon">🐔</span>
-        <span class="mark-text">CHICKENBEAST</span>
-      </div>
+      <div class="mark"><span class="mark-icon">🐔</span><span class="mark-text">CHICKENBEAST</span></div>
       <div class="chips">
         <span class="chip">Mainnet</span>
         <a class="chip ghost" href="https://t.me/chickenbeastbot" target="_blank" rel="noopener">Bot</a>
@@ -36,9 +32,7 @@
       </div>
     </header>
     <div class="hero-block">
-      <div class="hero-ring skel">
-        <img src="chickenbeast.jpg" alt="ChickenBeast" class="hero-img" draggable="false" onload="this.parentElement.classList.remove('skel')" />
-      </div>
+      <div class="hero-ring skel"><img src="chickenbeast.jpg" alt="ChickenBeast" class="hero-img" draggable="false" onload="this.parentElement.classList.remove('skel')" /></div>
       <p class="eyebrow">SOLANA · $CBEAST · S1</p>
       <h1 class="display">Too jacked<br/><em>to rug.</em></h1>
       <p class="lede">Tap. Flex. Claim. Wallet-only gym for the coop that never sells.</p>
@@ -55,22 +49,14 @@
       <div class="feat"><b>+10%</b><span>referrals</span></div>
     </div>
   </div>
-
   <div id="app" class="app hidden">
     <header class="bar">
-      <div class="mark sm">
-        <span class="mark-icon">🐔</span>
-        <div>
-          <div class="mark-text">CHICKENBEAST</div>
-          <div class="bar-sub"><span id="onlineCount">1,284</span> online</div>
-        </div>
-      </div>
+      <div class="mark sm"><span class="mark-icon">🐔</span><div><div class="mark-text">CHICKENBEAST</div><div class="bar-sub"><span id="onlineCount">1,284</span> online</div></div></div>
       <div class="bar-actions">
-        <button class="pill-btn" id="soundBtn" aria-label="Sound" title="Sound">🔊</button>
+        <button class="pill-btn" id="soundBtn" aria-label="Sound">🔊</button>
         <button class="pill-btn" id="walletChip" aria-label="Wallet">◎</button>
       </div>
     </header>
-
     <main class="views">
       <section class="view active" id="screen-home">
         <div class="score">
@@ -85,8 +71,7 @@
         <div class="arena">
           <button type="button" class="beast skel" id="tapArea" aria-label="Tap to flex">
             <img src="chickenbeast.jpg" alt="" class="beast-img" draggable="false" onload="this.parentElement.classList.remove('skel')" />
-            <span class="ripple"></span>
-            <span class="float-num" id="tapFeedback">+1</span>
+            <span class="ripple"></span><span class="float-num" id="tapFeedback">+1</span>
           </button>
           <p class="arena-hint">Hold the flex</p>
         </div>
@@ -96,127 +81,39 @@
           <div class="tile"><span>Rank</span><strong id="rankName">Scrawny</strong></div>
           <div class="tile"><span>Streak</span><strong id="streak">0</strong></div>
         </div>
-        <div class="panel">
-          <div class="panel-row"><span id="rankFull">Scrawny Chick</span><span id="rankProgress">0 / 10k</span></div>
-          <div class="track"><i id="rankBar" style="width:0%"></i></div>
-          <p class="panel-note">Next · <span id="nextRank">Barnyard Broiler</span></p>
-        </div>
-        <div class="panel">
-          <div class="panel-row"><span>Passive incubation</span><span class="tag">8h cap</span></div>
-          <div class="track"><i id="passiveBar" style="width:0%"></i></div>
-          <div class="panel-row end">
-            <span id="passiveBP">0 BP ready</span>
-            <button class="btn" id="collectBtn">Collect</button>
-          </div>
-        </div>
-        <div class="panel">
-          <div class="panel-row"><span>Stamina</span><span id="staminaFull">1000 / 1000</span></div>
-          <div class="track mint"><i id="staminaBar" style="width:100%"></i></div>
-        </div>
-        <div class="panel">
-          <div class="panel-row"><span>🔥 Cluck-in streak</span><span class="tag" id="dailyStreakLabel">0 days</span></div>
-          <div class="streak-cal" id="streakCal"></div>
-        </div>
-        <div class="panel">
-          <div class="panel-row"><span>🎯 Daily missions</span><span class="tag soft" id="missionProgress">0/3</span></div>
-          <div id="missionsList" class="missions"></div>
-        </div>
+        <div class="panel"><div class="panel-row"><span id="rankFull">Scrawny Chick</span><span id="rankProgress">0 / 10k</span></div><div class="track"><i id="rankBar" style="width:0%"></i></div><p class="panel-note">Next · <span id="nextRank">Barnyard Broiler</span></p></div>
+        <div class="panel"><div class="panel-row"><span>Passive incubation</span><span class="tag">8h cap</span></div><div class="track"><i id="passiveBar" style="width:0%"></i></div><div class="panel-row end"><span id="passiveBP">0 BP ready</span><button class="btn" id="collectBtn">Collect</button></div></div>
+        <div class="panel"><div class="panel-row"><span>Stamina</span><span id="staminaFull">1000 / 1000</span></div><div class="track mint"><i id="staminaBar" style="width:100%"></i></div></div>
+        <div class="panel"><div class="panel-row"><span>🔥 Cluck-in streak</span><span class="tag" id="dailyStreakLabel">0 days</span></div><div class="streak-cal" id="streakCal"></div></div>
+        <div class="panel"><div class="panel-row"><span>🎯 Daily missions</span><span class="tag soft" id="missionProgress">0/3</span></div><div id="missionsList" class="missions"></div></div>
       </section>
-
       <section class="view" id="screen-boosts">
         <h2 class="view-title">Stack</h2>
         <p class="view-sub">Upgrades need a connected wallet.</p>
-        <div class="panel accent">
-          <div class="panel-row">
-            <div>
-              <strong class="big">Mega Flex</strong>
-              <p class="view-sub tight">2× earnings · 10 min</p>
-            </div>
-            <button class="btn" id="megaFlexBtn">350 BP</button>
-          </div>
-        </div>
+        <div class="panel accent"><div class="panel-row"><div><strong class="big">Mega Flex</strong><p class="view-sub tight">2× earnings · 10 min</p></div><button class="btn" id="megaFlexBtn">350 BP</button></div></div>
         <div id="upgradesGrid" class="stack"></div>
-        <div class="panel">
-          <div class="panel-row"><span>🎁 Daily cluck-in</span><span class="tag" id="dailyBadge">Ready</span></div>
-          <p class="view-sub tight">Free BP every 24h. Builds streak.</p>
-          <button class="btn wide" id="dailyBtn">Claim daily</button>
-        </div>
+        <div class="panel"><div class="panel-row"><span>🎁 Daily cluck-in</span><span class="tag" id="dailyBadge">Ready</span></div><p class="view-sub tight">Free BP every 24h. Builds streak.</p><button class="btn wide" id="dailyBtn">Claim daily</button></div>
       </section>
-
       <section class="view" id="screen-friends">
         <h2 class="view-title">Coop</h2>
         <p class="view-sub">Referrals · leaderboard · community</p>
-        <div class="panel center">
-          <p class="score-label">Referral</p>
-          <div class="ref" id="refCode">Connect wallet</div>
-          <div class="row-gap">
-            <button class="btn" id="copyRef">Copy</button>
-            <button class="btn ghost" id="shareRef">Share</button>
-            <button class="btn ghost" id="shareCardBtn">Card</button>
-          </div>
-        </div>
-        <div class="grid-2">
-          <div class="tile tall"><span>Friends</span><strong id="friendCount">0</strong></div>
-          <div class="tile tall"><span>Earned</span><strong id="refEarned">0 BP</strong></div>
-        </div>
-        <div class="panel">
-          <div class="panel-row"><span>📢 Channel</span><span class="tag soft">Official</span></div>
-          <p class="view-sub tight">News, drops, and coop updates.</p>
-          <a class="btn wide" href="https://t.me/+sndtBvs3zHNkMGJk" target="_blank" rel="noopener" style="text-align:center;text-decoration:none;display:block;line-height:1.2;padding-top:13px">Join Chicken Beast</a>
-        </div>
-        <div class="panel">
-          <div class="panel-row"><span>💬 Public group</span><span class="tag soft">Soon</span></div>
-          <p class="view-sub tight">Member chat — create a group &amp; add the bot, then we link it here.</p>
-          <button class="btn wide ghost" id="joinGroupBtn" disabled>Join coop (coming)</button>
-        </div>
+        <div class="panel center"><p class="score-label">Referral</p><div class="ref" id="refCode">Connect wallet</div><div class="row-gap"><button class="btn" id="copyRef">Copy</button><button class="btn ghost" id="shareRef">Share</button><button class="btn ghost" id="shareCardBtn">Card</button></div></div>
+        <div class="grid-2"><div class="tile tall"><span>Friends</span><strong id="friendCount">0</strong></div><div class="tile tall"><span>Earned</span><strong id="refEarned">0 BP</strong></div></div>
+        <div class="panel"><div class="panel-row"><span>📢 Channel</span><span class="tag soft">Official</span></div><p class="view-sub tight">News, drops, and coop updates.</p><a class="btn wide" href="https://t.me/+sndtBvs3zHNkMGJk" target="_blank" rel="noopener" style="text-align:center;text-decoration:none;display:block;line-height:1.2;padding-top:13px">Join Chicken Beast</a></div>
+        <div class="panel"><div class="panel-row"><span>💬 Public group</span><span class="tag soft">Soon</span></div><p class="view-sub tight">Member chat — create a group &amp; add the bot, then we link it here.</p><button class="btn wide ghost" id="joinGroupBtn" disabled>Join coop (coming)</button></div>
         <h3 class="board-title">Leaderboard</h3>
-        <div class="tabs">
-          <button class="tab active" data-board="all">All-time</button>
-          <button class="tab" data-board="week">This week</button>
-        </div>
-        <div class="panel board-you" id="boardYou">
-          <div class="lb-row you">
-            <span class="lb-pos" id="youPos">—</span>
-            <span class="lb-name" id="youName">You</span>
-            <span class="lb-bp" id="youBp">0</span>
-          </div>
-        </div>
+        <div class="tabs"><button class="tab active" data-board="all">All-time</button><button class="tab" data-board="week">This week</button></div>
+        <div class="panel board-you"><div class="lb-row you"><span class="lb-pos" id="youPos">—</span><span class="lb-name" id="youName">You</span><span class="lb-bp" id="youBp">0</span></div></div>
         <div class="board" id="leaderboard"></div>
       </section>
-
       <section class="view" id="screen-wallet">
         <h2 class="view-title">Wallet</h2>
         <p class="view-sub">Phantom or Solflare · mainnet</p>
-        <div class="panel">
-          <div class="status" id="walletStatus"><i class="dot off"></i> Not connected</div>
-          <button class="btn wide" id="connectWalletBtn">Connect wallet</button>
-          <button class="btn ghost wide hidden" id="disconnectWalletBtn">Disconnect</button>
-        </div>
-        <div class="panel claim">
-          <p class="score-label">Available to claim</p>
-          <div class="score-val sm" id="claimAmount">0.00</div>
-          <p class="unit">$CBEAST · 1K BP = 1</p>
-          <div class="grid-2 tight">
-            <div class="tile"><span>Claimed</span><strong id="claimedTotal">0</strong></div>
-            <div class="tile"><span>Min</span><strong>0.1</strong></div>
-          </div>
-          <button class="btn wide" id="claimCoinBtn">Claim coins</button>
-          <p class="fine claim-note" id="claimNote">On-chain claim program coming — balance is recorded to your wallet profile.</p>
-          <div class="ca">
-            <span>CA</span>
-            <code id="ca">GBFHyayakxkcTWUXHEJKTnWY82f5C8MpoRzB6YBopump</code>
-            <button class="btn ghost sm" id="copyCa">Copy</button>
-          </div>
-        </div>
-        <div class="panel">
-          <div class="kv"><span>Season badge</span><b id="detailBadge">S1 · Rookie</b></div>
-          <div class="kv"><span>Rank</span><b id="detailRank">Scrawny Chick</b></div>
-          <div class="kv"><span>Mined</span><b id="detailMined">0 BP</b></div>
-          <div class="kv"><span>Wallet</span><b id="detailUser">—</b></div>
-        </div>
+        <div class="panel"><div class="status" id="walletStatus"><i class="dot off"></i> Not connected</div><button class="btn wide" id="connectWalletBtn">Connect wallet</button><button class="btn ghost wide hidden" id="disconnectWalletBtn">Disconnect</button></div>
+        <div class="panel claim"><p class="score-label">Available to claim</p><div class="score-val sm" id="claimAmount">0.00</div><p class="unit">$CBEAST · 1K BP = 1</p><div class="grid-2 tight"><div class="tile"><span>Claimed</span><strong id="claimedTotal">0</strong></div><div class="tile"><span>Min</span><strong>0.1</strong></div></div><button class="btn wide" id="claimCoinBtn">Claim coins</button><p class="fine claim-note">On-chain claim program coming — balance is recorded to your wallet profile.</p><div class="ca"><span>CA</span><code id="ca">GBFHyayakxkcTWUXHEJKTnWY82f5C8MpoRzB6YBopump</code><button class="btn ghost sm" id="copyCa">Copy</button></div></div>
+        <div class="panel"><div class="kv"><span>Season badge</span><b id="detailBadge">S1 · Rookie</b></div><div class="kv"><span>Rank</span><b id="detailRank">Scrawny Chick</b></div><div class="kv"><span>Mined</span><b id="detailMined">0 BP</b></div><div class="kv"><span>Wallet</span><b id="detailUser">—</b></div></div>
       </section>
     </main>
-
     <nav class="dock">
       <button class="dock-item active" data-screen="home"><span>🏋️</span>Gym</button>
       <button class="dock-item" data-screen="boosts"><span>💊</span>Boosts</button>
@@ -224,7 +121,6 @@
       <button class="dock-item" data-screen="wallet"><span>💼</span>Wallet</button>
     </nav>
   </div>
-
   <div id="toast" class="toast hidden" role="status"></div>
   <script src="app.js"></script>
 </body>
