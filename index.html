@@ -172,10 +172,26 @@
           <button class="btn btn-ghost full hidden" id="disconnectWalletBtn" style="margin-top:10px">Disconnect</button>
         </div>
 
-        <div class="card">
-          <div class="list-title">Withdraw (coming soon)</div>
-          <p class="muted">Beast Points are game points. Token rewards open after bulk season. Holders of $CBEAST ($20+) already earn pump.fun rewards.</p>
-          <div class="ca-box">
+        <div class="card claim-card">
+          <div class="list-title">Claim $CBEAST</div>
+          <div class="claim-amount-wrap">
+            <div class="claim-label">AVAILABLE TO CLAIM</div>
+            <div class="claim-amount" id="claimAmount">0.00</div>
+            <div class="claim-unit">$CBEAST</div>
+          </div>
+          <div class="stat-row twin" style="margin:12px 0">
+            <div class="mini-stat tall">
+              <span class="ms-label">RATE</span>
+              <span class="ms-val" style="font-size:14px">1K BP = 1</span>
+            </div>
+            <div class="mini-stat tall">
+              <span class="ms-label">CLAIMED</span>
+              <span class="ms-val" id="claimedTotal" style="font-size:14px">0</span>
+            </div>
+          </div>
+          <p class="muted" id="claimHint">Mine BP, then claim coins to your connected wallet. Min claim: 0.1 $CBEAST.</p>
+          <button class="btn btn-primary full" id="claimCoinBtn">Claim coins</button>
+          <div class="ca-box" style="margin-top:14px">
             <span class="ca-label">$CBEAST CA</span>
             <code id="ca">GBFHyayakxkcTWUXHEJKTnWY82f5C8MpoRzB6YBopump</code>
             <button class="btn btn-sm btn-ghost" id="copyCa">Copy</button>
