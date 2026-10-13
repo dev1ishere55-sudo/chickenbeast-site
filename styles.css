@@ -1,14 +1,14 @@
 :root {
-  --bg: #070708;
-  --surface: #111113;
-  --surface-2: #1a1a1e;
-  --border: #2a2a2e;
-  --text: #fafafa;
-  --muted: #9ca3af;
-  --lime: #a3e635;
-  --lime-dim: #84cc16;
+  --bg: #0a0908;
+  --surface: #141210;
+  --surface-2: #1c1916;
+  --border: #2e2a24;
+  --text: #faf7f2;
+  --muted: #a39e94;
+  --lime: #f5c518;
+  --lime-dim: #d4a017;
   --green: #4ade80;
-  --orange: #fb923c;
+  --orange: #ff8c42;
   --radius: 18px;
   --radius-sm: 12px;
   --nav-h: 68px;
@@ -20,7 +20,7 @@
 html, body { height: 100%; }
 body {
   font-family: var(--font);
-  background: var(--bg);
+  background: radial-gradient(ellipse 120% 80% at 50% -20%, #2a2210 0%, var(--bg) 55%);
   color: var(--text);
   -webkit-font-smoothing: antialiased;
   overflow: hidden;
@@ -97,7 +97,7 @@ body.tg-webapp {
   line-height: 1.1;
   color: var(--lime);
   margin: 4px 0 10px;
-  text-shadow: 0 0 40px rgba(163, 230, 53, 0.25);
+  text-shadow: 0 0 40px rgba(245, 197, 24, 0.25);
 }
 .rate-row { display: flex; justify-content: center; gap: 8px; flex-wrap: wrap; }
 .rate-pill {
@@ -105,9 +105,9 @@ body.tg-webapp {
   font-weight: 600;
   padding: 5px 12px;
   border-radius: 999px;
-  background: rgba(163, 230, 53, 0.12);
+  background: rgba(245, 197, 24, 0.12);
   color: var(--lime);
-  border: 1px solid rgba(163, 230, 53, 0.25);
+  border: 1px solid rgba(245, 197, 24, 0.25);
 }
 .rate-pill.soft {
   background: var(--surface);
@@ -135,7 +135,7 @@ body.tg-webapp {
   object-fit: cover;
   border-radius: 50%;
   border: 3px solid var(--lime);
-  box-shadow: 0 0 0 6px rgba(163, 230, 53, 0.08), 0 0 50px rgba(163, 230, 53, 0.2);
+  box-shadow: 0 0 0 6px rgba(245, 197, 24, 0.08), 0 0 50px rgba(245, 197, 24, 0.2);
   transition: transform 0.08s ease;
 }
 .chicken-wrap:active .chicken-img { transform: scale(0.92); }
@@ -241,7 +241,7 @@ body.tg-webapp {
   letter-spacing: 0.5px;
   padding: 3px 8px;
   border-radius: 999px;
-  background: rgba(163, 230, 53, 0.12);
+  background: rgba(245, 197, 24, 0.12);
   color: var(--lime);
 }
 
@@ -272,8 +272,8 @@ body.tg-webapp {
   align-items: center;
   justify-content: space-between;
   gap: 12px;
-  border-color: rgba(251, 146, 60, 0.35);
-  background: linear-gradient(135deg, rgba(251,146,60,0.08), transparent);
+  border-color: rgba(255, 140, 66, 0.35);
+  background: linear-gradient(135deg, rgba(255,140,66,0.08), transparent);
 }
 .bh-title { font-family: var(--display); font-size: 16px; }
 .bh-desc { font-size: 12px; color: var(--muted); margin-top: 2px; }
@@ -373,7 +373,7 @@ body.tg-webapp {
   max-width: 480px;
   height: calc(var(--nav-h) + env(safe-area-inset-bottom, 0px));
   padding-bottom: env(safe-area-inset-bottom, 0px);
-  background: rgba(17, 17, 19, 0.92);
+  background: rgba(20, 18, 16, 0.94);
   backdrop-filter: blur(16px);
   border-top: 1px solid var(--border);
   display: flex;
@@ -428,8 +428,8 @@ body.tg-webapp {
   align-items: center;
   justify-content: space-between;
   gap: 10px;
-  background: rgba(163, 230, 53, 0.1);
-  border: 1px solid rgba(163, 230, 53, 0.3);
+  background: rgba(245, 197, 24, 0.1);
+  border: 1px solid rgba(245, 197, 24, 0.3);
   border-radius: var(--radius-sm);
   padding: 10px 12px;
   margin-bottom: 8px;
@@ -507,10 +507,9 @@ body.tg-webapp {
 }
 .hidden { display: none !important; }
 
-/* Claim coin */
 .claim-card {
-  border-color: rgba(163, 230, 53, 0.35);
-  background: linear-gradient(160deg, rgba(163,230,53,0.08), var(--surface) 55%);
+  border-color: rgba(245, 197, 24, 0.35);
+  background: linear-gradient(160deg, rgba(245,197,24,0.1), var(--surface) 55%);
 }
 .claim-amount-wrap {
   text-align: center;
@@ -527,7 +526,7 @@ body.tg-webapp {
   font-size: 42px;
   line-height: 1.1;
   color: var(--lime);
-  text-shadow: 0 0 32px rgba(163, 230, 53, 0.3);
+  text-shadow: 0 0 32px rgba(245, 197, 24, 0.3);
   margin: 4px 0 2px;
 }
 .claim-unit {
