@@ -5,6 +5,10 @@
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, viewport-fit=cover" />
   <title>CHICKENBEAST — Too Jacked To Rug</title>
   <meta name="theme-color" content="#0c0f14" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+  <meta name="mobile-web-app-capable" content="yes" />
+  <meta name="format-detection" content="telephone=no" />
   <script src="https://telegram.org/js/telegram-web-app.js"></script>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -12,7 +16,7 @@
   <link rel="stylesheet" href="styles.css" />
   <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🐔</text></svg>" />
 </head>
-<body>
+<body class="booting">
   <div class="noise"></div>
   <div class="orb orb-a"></div>
   <div class="orb orb-b"></div>
@@ -61,7 +65,7 @@
           <div class="bar-sub"><span id="onlineCount">1,284</span> online</div>
         </div>
       </div>
-      <button class="pill-btn" id="walletChip">◎</button>
+      <button class="pill-btn" id="walletChip" aria-label="Wallet">◎</button>
     </header>
 
     <main class="views">
@@ -76,7 +80,7 @@
         </div>
 
         <div class="arena">
-          <button type="button" class="beast" id="tapArea">
+          <button type="button" class="beast" id="tapArea" aria-label="Tap to flex">
             <img src="chickenbeast.jpg" alt="" class="beast-img" draggable="false" />
             <span class="ripple"></span>
             <span class="float-num" id="tapFeedback">+1</span>
@@ -188,7 +192,7 @@
     </nav>
   </div>
 
-  <div id="toast" class="toast hidden"></div>
+  <div id="toast" class="toast hidden" role="status"></div>
   <script src="app.js"></script>
 </body>
 </html>
