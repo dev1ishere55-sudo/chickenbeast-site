@@ -2,7 +2,8 @@
 const CA="GBFHyayakxkcTWUXHEJKTnWY82f5C8MpoRzB6YBopump",BOT="https://t.me/chickenbeastbot";
 const RANKS=[{name:"Scrawny Chick",short:"Scrawny",need:0},{name:"Barnyard Broiler",short:"Broiler",need:1e4},{name:"Buff Hen",short:"Buff",need:5e4},{name:"Jacked Rooster",short:"Jacked",need:15e4},{name:"Gym Beast",short:"Beast",need:5e5},{name:"Too Jacked",short:"Legend",need:2e6}];
 const UPS=[{id:"whey",name:"Whey Corn",desc:"More power.",base:100,effect:l=>`+${l+1} BP/tap`,apply:(s,l)=>{s.tapPower=1+l}},{id:"creatine",name:"Creatine Coop",desc:"Passive gains.",base:300,effect:l=>`${75+l*25} BP/hr`,apply:(s,l)=>{s.perHour=75+l*25}},{id:"pre",name:"Pre-Workout Cluck",desc:"More stamina.",base:500,effect:l=>`${1000+l*250} stamina`,apply:(s,l)=>{s.maxStamina=1000+l*250}}];
-const def=()=>({bp:0,totalMined:0,stamina:1000,maxStamina:1000,tapPower:1,perHour:75,streak:0,lastTap:0,upgrades:{whey:0,creatine:0,pre:0},megaFlexUntil:0,lastPassive:Date.now(),lastDaily:0,dailyStreak:0,wallet:null,walletProvider:null,refCode:null,friends:0,refEarned:0});
+const BP_PER_COIN=1000,MIN_CLAIM=0.1;
+const def=()=>({bp:0,totalMined:0,stamina:1000,maxStamina:1000,tapPower:1,perHour:75,streak:0,lastTap:0,upgrades:{whey:0,creatine:0,pre:0},megaFlexUntil:0,lastPassive:Date.now(),lastDaily:0,dailyStreak:0,wallet:null,walletProvider:null,refCode:null,friends:0,refEarned:0,claimedCoins:0,claimableBp:0});
 let state=load();
 function load(){try{const r=localStorage.getItem("cbeast_v4");if(!r)return def();const s={...def(),...JSON.parse(r)};UPS.forEach(u=>u.apply(s,s.upgrades[u.id]||0));return s}catch{return def()}}
 function save(){if(!state.wallet)return;localStorage.setItem("cbeast_v4",JSON.stringify(state));localStorage.setItem("cbeast_v4_"+state.wallet,JSON.stringify(state))}
@@ -35,6 +36,11 @@ const ok=dailyOk(),rw=50+state.dailyStreak*10;$("#dailyBadge").textContent=ok?"R
 $("#refCode").textContent=c?(state.refCode||short(state.wallet)):"Connect wallet for link";$("#friendCount").textContent=state.friends;$("#refEarned").textContent=fmt(state.refEarned)+" BP";$("#copyRef").disabled=!$("#shareRef").disabled=!c;
 $("#walletStatus").innerHTML=c?`<span class="dot on"></span><span>${short(state.wallet)} - ${state.walletProvider||"wallet"}</span>`:`<span class="dot off"></span><span>Not connected</span>`;
 const cb=$("#connectWalletBtn"),db=$("#disconnectWalletBtn");if(c){cb.classList.add("hidden");db?.classList.remove("hidden")}else{cb.classList.remove("hidden");cb.textContent="Connect Phantom / Solflare";db?.classList.add("hidden")}
+const cl=claimableCoins();
+if($("#claimAmount"))$("#claimAmount").textContent=cl.toFixed(2);
+if($("#claimedTotal"))$("#claimedTotal").textContent=fmt(state.claimedCoins||0);
+const claimBtn=$("#claimCoinBtn");
+if(claimBtn){claimBtn.disabled=!c||cl<MIN_CLAIM;claimBtn.textContent=!c?"Connect wallet to claim":cl<MIN_CLAIM?"Mine more BP to claim":"Claim "+cl.toFixed(2)+" $CBEAST"}
 $("#detailRank").textContent=rk.name;$("#detailMined").textContent=fmt(state.totalMined)+" BP";$("#detailUser").textContent=c?short(state.wallet):"Not signed in";
 if($("#walletChip"))$("#walletChip").textContent=c?"OK":"W";
 $("#onlineCount").textContent=(1200+Math.floor(Math.sin(Date.now()/6e4)*80)+Math.floor(Math.random()*20)).toLocaleString()}
@@ -44,10 +50,26 @@ function buy(id){if(!need("upgrade"))return;const u=UPS.find(x=>x.id===id);if(!u
 function collect(){const a=passive();if(a<1)return;state.bp+=a;state.totalMined+=a;state.lastPassive=Date.now();save();render();toast("Collected "+fmt(a)+" BP")}
 function mega(){if(!need("Mega Flex"))return;if(state.bp<350||Date.now()<state.megaFlexUntil)return;state.bp-=350;state.megaFlexUntil=Date.now()+6e5;save();render();toast("2x Mega Flex - 10 min!")}
 function daily(){if(!need("claim"))return;if(!dailyOk())return;const r=50+state.dailyStreak*10;state.bp+=r;state.totalMined+=r;state.dailyStreak=Date.now()-state.lastDaily<1728e5?state.dailyStreak+1:1;state.lastDaily=Date.now();save();render();toast("Daily +"+r+" BP")}
+
+function claimableCoins(){return state.bp/BP_PER_COIN}
+function claimCoins(){
+  if(!need("claim coins"))return;
+  const amt=claimableCoins();
+  if(amt<MIN_CLAIM){toast("Min claim is "+MIN_CLAIM+" $CBEAST");return}
+  const coins=Math.floor(amt*100)/100;
+  const bpCost=Math.floor(coins*BP_PER_COIN);
+  if(bpCost<1||state.bp<bpCost){toast("Not enough BP");return}
+  state.bp-=bpCost;
+  state.claimedCoins=(state.claimedCoins||0)+coins;
+  save();render();
+  toast("Claimed "+coins.toFixed(2)+" $CBEAST → "+short(state.wallet));
+  window._haptic();
+}
 $("#tapArea").addEventListener("pointerdown",doTap);
 $("#collectBtn").onclick=collect;$("#megaFlexBtn").onclick=mega;$("#dailyBtn").onclick=daily;
 $("#connectWalletBtn").onclick=pickWallet;$("#disconnectWalletBtn")&&($("#disconnectWalletBtn").onclick=disconnect);
 $("#authConnectBtn")&&($("#authConnectBtn").onclick=pickWallet);
+$("#claimCoinBtn")&&($("#claimCoinBtn").onclick=claimCoins);
 $("#copyCa").onclick=async()=>{try{await navigator.clipboard.writeText(CA);toast("CA copied")}catch{toast(CA)}};
 $("#copyRef").onclick=async()=>{if(!need("referral"))return;const l=refL();try{await navigator.clipboard.writeText(l);toast("Link copied")}catch{toast(l)}};
 $("#shareRef").onclick=()=>{if(!need("share"))return;const l=refL();if(tg?.openTelegramLink)tg.openTelegramLink("https://t.me/share/url?url="+encodeURIComponent(l)+"&text="+encodeURIComponent("Too Jacked To Rug"));else if(navigator.share)navigator.share({title:"CHICKENBEAST",url:l}).catch(()=>{});else{navigator.clipboard?.writeText(l);toast("Link copied")}};
