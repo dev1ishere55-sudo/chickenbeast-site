@@ -506,3 +506,36 @@ body.tg-webapp {
   cursor: pointer;
 }
 .hidden { display: none !important; }
+
+/* Claim coin */
+.claim-card {
+  border-color: rgba(163, 230, 53, 0.35);
+  background: linear-gradient(160deg, rgba(163,230,53,0.08), var(--surface) 55%);
+}
+.claim-amount-wrap {
+  text-align: center;
+  padding: 12px 0 4px;
+}
+.claim-label {
+  font-size: 11px;
+  letter-spacing: 1.5px;
+  color: var(--muted);
+  font-weight: 600;
+}
+.claim-amount {
+  font-family: var(--display);
+  font-size: 42px;
+  line-height: 1.1;
+  color: var(--lime);
+  text-shadow: 0 0 32px rgba(163, 230, 53, 0.3);
+  margin: 4px 0 2px;
+}
+.claim-unit {
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--muted);
+  letter-spacing: 0.5px;
+}
+#claimCoinBtn:disabled {
+  opacity: 0.45;
+}
