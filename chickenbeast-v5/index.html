@@ -1,0 +1,322 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, viewport-fit=cover" />
+  <title>CHICKENBEAST — Too Jacked To Rug</title>
+  <meta name="theme-color" content="#0a0c10" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+  <meta name="mobile-web-app-capable" content="yes" />
+  <meta name="description" content="Big breasts. Big cock. Big chicken energy. Local demo game. No real token rewards or server-saved progress." />
+  <script src="https://telegram.org/js/telegram-web-app.js"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,400;500;600;700;800&family=Syne:wght@700;800&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="styles.css" />
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🐔</text></svg>" />
+</head>
+<body class="booting">
+  <div class="noise"></div>
+  <div class="orb orb-a"></div>
+  <div class="orb orb-b"></div>
+  <canvas id="confetti" class="confetti-cv"></canvas>
+
+  <!-- LANDING -->
+  <div id="landing" class="landing">
+    <header class="l-top">
+      <div class="mark">
+        <span class="mark-icon">🐔</span>
+        <span class="mark-text">CHICKENBEAST</span>
+      </div>
+      <div class="chips">
+        <span class="chip live">DEMO</span>
+        <a class="chip ghost" href="https://t.me/ChickenBeast" target="_blank" rel="noopener">TG</a>
+        <a class="chip ghost" href="https://x.com/ChickenBeastX" target="_blank" rel="noopener">X</a>
+      </div>
+    </header>
+
+    <div class="hero-block">
+      <div class="hero-ring skel">
+        <img src="chickenbeast.jpg" alt="ChickenBeast — Too Jacked To Rug" class="hero-img" draggable="false" onload="this.parentElement.classList.remove('skel')" />
+      </div>
+      <p class="eyebrow">SOLANA · $CBEAST · S1</p>
+      <h1 class="display">Too jacked<br/><em>to rug.</em></h1>
+      <p class="tagline">🐔 BIG BREASTS. BIG COCK. BIG CHICKEN ENERGY. 🍗</p>
+      <p class="lede">Tap. Dash. Flex. Claim. Wallet-only gym for the coop that never sells.</p>
+    </div>
+
+    <div class="cta-stack">
+      <button class="cta cta-phantom" id="btnPhantom"><span>👻</span> Phantom</button>
+      <button class="cta cta-solflare" id="btnSolflare"><span>🔆</span> Solflare</button>
+      <p class="fine">Wallet connection is optional. No transactions or token claims.</p>
+      <button class="cta cta-line" id="btnEnterApp">Enter the gym →</button>
+    </div>
+
+    <div class="feature-row">
+      <div class="feat"><b>8h</b><span>mine cap</span></div>
+      <div class="feat"><b>Dash</b><span>run game</span></div>
+      <div class="feat"><b>+10%</b><span>referrals</span></div>
+    </div>
+
+    <div class="manifesto-card">
+      <p>What started as a joke about the industrial farming complex turned into something we couldn't stop laughing about. No fake hype. No manufactured community. Just chicken, chaos, and the willingness to see where this thing goes.</p>
+      <p class="manifesto-foot">~34% supply project-held · intended safe from rug · learning in public</p>
+    </div>
+  </div>
+
+  <!-- APP -->
+  <div id="app" class="app hidden">
+    <header class="bar">
+      <div class="mark sm">
+        <span class="mark-icon">🐔</span>
+        <div>
+          <div class="mark-text">CHICKENBEAST</div>
+          <div class="bar-sub">Demo leaderboard · this device only</div>
+        </div>
+      </div>
+      <div class="bar-actions">
+        <button class="pill-btn" id="soundBtn" aria-label="Sound">🔊</button>
+        <button class="pill-btn" id="walletChip" aria-label="Wallet">◎</button>
+      </div>
+    </header>
+
+    <main class="views">
+      <!-- HOME / GYM -->
+      <section class="view active" id="screen-home">
+        <div class="score">
+          <span class="score-label">Beast Points</span>
+          <div class="score-val" id="bpDisplay">0</div>
+          <div class="score-meta">
+            <span class="tag" id="ratePill">75 BP/hr</span>
+            <span class="tag soft" id="miningStatus">Mining</span>
+            <span class="tag badge" id="seasonBadge">S1 · Rookie</span>
+          </div>
+        </div>
+
+        <div class="arena">
+          <button type="button" class="beast skel" id="tapArea" aria-label="Tap to flex">
+            <img src="chickenbeast.jpg" alt="" class="beast-img" draggable="false" onload="this.parentElement.classList.remove('skel')" />
+            <span class="ripple"></span>
+            <span class="float-num" id="tapFeedback">+1</span>
+          </button>
+          <p class="arena-hint">Hold the flex · tap for BP</p>
+        </div>
+
+        <div class="grid-4">
+          <div class="tile"><span>Tap</span><strong id="tapPower">+1</strong></div>
+          <div class="tile"><span>Stamina</span><strong id="staminaText">1000</strong></div>
+          <div class="tile"><span>Rank</span><strong id="rankName">Scrawny</strong></div>
+          <div class="tile"><span>Streak</span><strong id="streak">0</strong></div>
+        </div>
+
+        <div class="panel">
+          <div class="panel-row"><span id="rankFull">Scrawny Chick</span><span id="rankProgress">0 / 10k</span></div>
+          <div class="track"><i id="rankBar" style="width:0%"></i></div>
+          <p class="panel-note">Next · <span id="nextRank">Barnyard Broiler</span></p>
+        </div>
+
+        <div class="panel">
+          <div class="panel-row"><span>Passive incubation</span><span class="tag">8h cap</span></div>
+          <div class="track"><i id="passiveBar" style="width:0%"></i></div>
+          <div class="panel-row end">
+            <span id="passiveBP">0 BP ready</span>
+            <button class="btn" id="collectBtn">Collect</button>
+          </div>
+        </div>
+
+        <div class="panel">
+          <div class="panel-row"><span>Stamina</span><span id="staminaFull">1000 / 1000</span></div>
+          <div class="track mint"><i id="staminaBar" style="width:100%"></i></div>
+        </div>
+
+        <div class="panel">
+          <div class="panel-row"><span>🔥 Cluck-in streak</span><span class="tag" id="dailyStreakLabel">0 days</span></div>
+          <div class="streak-cal" id="streakCal"></div>
+        </div>
+
+        <div class="panel">
+          <div class="panel-row"><span>🎯 Daily missions</span><span class="tag soft" id="missionProgress">0/3</span></div>
+          <div id="missionsList" class="missions"></div>
+        </div>
+      </section>
+
+      <!-- BEAST DASH (Temple Run style) -->
+      <section class="view" id="screen-run">
+        <h2 class="view-title">Beast Dash</h2>
+        <p class="view-sub">Endless run · jump obstacles · earn BP</p>
+        <div class="run-wrap">
+          <canvas id="runCanvas" width="360" height="480"></canvas>
+          <div id="runOverlay" class="run-overlay">
+            <div class="run-start" id="runStartUI">
+              <p class="run-title">🐔 BEAST DASH</p>
+              <p class="run-desc">Tap or space to jump. Collect corn. Avoid fences.</p>
+              <button class="btn wide" id="runStartBtn">Start run</button>
+            </div>
+            <div class="run-over hidden" id="runOverUI">
+              <p class="run-title">Run over</p>
+              <p class="run-score">Score <span id="runFinalScore">0</span></p>
+              <p class="run-bp">+<span id="runBpEarned">0</span> BP</p>
+              <button class="btn wide" id="runRetryBtn">Run again</button>
+            </div>
+          </div>
+        </div>
+        <div class="panel">
+          <div class="panel-row"><span>Best score</span><strong id="runBest">0</strong></div>
+          <div class="panel-row"><span>Total dash BP</span><strong id="runTotalBp">0</strong></div>
+        </div>
+      </section>
+
+      <!-- BOOSTS -->
+      <section class="view" id="screen-boosts">
+        <h2 class="view-title">Stack</h2>
+        <p class="view-sub">Upgrades need a connected wallet.</p>
+        <div class="panel accent">
+          <div class="panel-row">
+            <div>
+              <strong class="big">Mega Flex</strong>
+              <p class="view-sub tight">2× earnings · 10 min</p>
+            </div>
+            <button class="btn" id="megaFlexBtn">350 BP</button>
+          </div>
+        </div>
+        <div id="upgradesGrid" class="stack"></div>
+        <div class="panel">
+          <div class="panel-row"><span>🎁 Daily cluck-in</span><span class="tag" id="dailyBadge">Ready</span></div>
+          <p class="view-sub tight">Free BP every 24h. Builds streak.</p>
+          <button class="btn wide" id="dailyBtn">Claim daily</button>
+        </div>
+      </section>
+
+      <!-- FRIENDS / COMMUNITY -->
+      <section class="view" id="screen-friends">
+        <h2 class="view-title">Coop</h2>
+        <p class="view-sub">Referrals · leaderboard · community</p>
+
+        <div class="panel center">
+          <p class="view-sub tight">Your referral link</p>
+          <code class="ref-code" id="refLink">—</code>
+          <div class="grid-2 tight" style="margin-top:10px">
+            <button class="btn" id="copyRef">Copy link</button>
+            <button class="btn ghost" id="shareRef">Share</button>
+          </div>
+          <p class="fine" style="margin-top:8px">Earn <b>10%</b> of friends' tap gains</p>
+        </div>
+
+        <div class="panel">
+          <div class="panel-row"><span>📢 Telegram</span><span class="tag soft">Official</span></div>
+          <a class="btn wide" href="https://t.me/ChickenBeast" target="_blank" rel="noopener">Join @ChickenBeast</a>
+        </div>
+        <div class="panel">
+          <div class="panel-row"><span>🐦 X / Twitter</span></div>
+          <a class="btn wide ghost" href="https://x.com/ChickenBeastX" target="_blank" rel="noopener">@ChickenBeastX</a>
+        </div>
+        <div class="panel">
+          <div class="panel-row"><span>🤖 Bot</span></div>
+          <a class="btn wide ghost" href="https://t.me/chickenbeastbot" target="_blank" rel="noopener">@chickenbeastbot</a>
+        </div>
+
+        <div class="tabs">
+          <button class="tab active" data-board="all">All-time</button>
+          <button class="tab" data-board="week">This week</button>
+        </div>
+        <div class="panel board-you" id="boardYou">
+          <div class="lb-row you">
+            <span class="lb-pos" id="youPos">—</span>
+            <span class="lb-name" id="youName">You</span>
+            <span class="lb-bp" id="youBp">0</span>
+          </div>
+        </div>
+        <div class="board" id="leaderboard"></div>
+      </section>
+
+      <!-- WALLET + ROADMAP + ABOUT -->
+      <section class="view" id="screen-wallet">
+        <h2 class="view-title">Wallet</h2>
+        <p class="view-sub">Phantom or Solflare · mainnet</p>
+        <div class="panel">
+          <div class="status" id="walletStatus"><i class="dot off"></i> Not connected</div>
+          <button class="btn wide" id="connectWalletBtn">Connect wallet</button>
+          <button class="btn ghost wide hidden" id="disconnectWalletBtn">Disconnect</button>
+        </div>
+        <div class="panel claim">
+          <p class="score-label">Available to claim</p>
+          <div class="score-val sm" id="claimAmount">0.00</div>
+          <p class="unit">$CBEAST · 1K BP = 1</p>
+          <div class="grid-2 tight">
+            <div class="tile"><span>Claimed</span><strong id="claimedTotal">0</strong></div>
+            <div class="tile"><span>Min</span><strong>0.1</strong></div>
+          </div>
+          <button class="btn wide" id="claimCoinBtn">Claim coins</button>
+          <p class="fine claim-note" id="claimNote">Token claims are not available yet. Beast Points are in-game points with no guaranteed token value. No payout is promised.</p>
+          <div class="ca">
+            <span>CA</span>
+            <code id="ca">GBFHyayakxkcTWUXHEJKTnWY82f5C8MpoRzB6YBopump</code>
+            <button class="btn ghost sm" id="copyCa">Copy</button>
+          </div>
+        </div>
+        <div class="panel">
+          <div class="kv"><span>Season badge</span><b id="detailBadge">S1 · Rookie</b></div>
+          <div class="kv"><span>Rank</span><b id="detailRank">Scrawny Chick</b></div>
+          <div class="kv"><span>Mined</span><b id="detailMined">0 BP</b></div>
+          <div class="kv"><span>Wallet</span><b id="detailUser">—</b></div>
+        </div>
+
+        <!-- ROADMAP -->
+        <h2 class="view-title" style="margin-top:20px">Roadmap</h2>
+        <div class="roadmap">
+          <div class="rm-item done">
+            <span class="rm-dot"></span>
+            <div>
+              <strong>S1 · Hatch</strong>
+              <p>Tap-to-earn · passive mine · wallet sign-in · daily missions · Beast Dash</p>
+            </div>
+          </div>
+          <div class="rm-item">
+            <span class="rm-dot"></span>
+            <div>
+              <strong>S2 · Flex</strong>
+              <p>On-chain claim program · referral rewards live · community challenges</p>
+            </div>
+          </div>
+          <div class="rm-item">
+            <span class="rm-dot"></span>
+            <div>
+              <strong>S3 · Coop</strong>
+              <p>Leaderboard seasons · NFT badges · more mini-games · meme contests</p>
+            </div>
+          </div>
+          <div class="rm-item">
+            <span class="rm-dot"></span>
+            <div>
+              <strong>S4 · Legend</strong>
+              <p>Governance experiments · treasury transparency · whatever the coop builds next</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- ABOUT / WHITEPAPER LIGHT -->
+        <h2 class="view-title" style="margin-top:20px">Why this chicken</h2>
+        <div class="panel about">
+          <p>🐔 BIG BREASTS. BIG COCK. BIG CHICKEN ENERGY. 🍗</p>
+          <p>What started as a joke about the industrial farming complex turned into something we couldn't stop laughing about. Chicken breasts, drumsticks, wings, thighs… there's a whole menu of possibilities.</p>
+          <p>Right now: no elaborate promises. Just an idea, a sense of humor, and organic growth. No fake hype. No manufactured community.</p>
+          <p>~34% of supply is project-controlled and intended to stay safe from a rug. Locking or burning may be considered. This is an experiment — learning in public.</p>
+          <p class="fine">No guarantees. No unnecessary hype. Just chicken, chaos, and community. 🐔🔥</p>
+        </div>
+      </section>
+    </main>
+
+    <nav class="dock">
+      <button class="dock-item active" data-screen="home"><span>🏋️</span>Gym</button>
+      <button class="dock-item" data-screen="run"><span>🏃</span>Dash</button>
+      <button class="dock-item" data-screen="boosts"><span>💊</span>Boosts</button>
+      <button class="dock-item" data-screen="friends"><span>🐥</span>Coop</button>
+      <button class="dock-item" data-screen="wallet"><span>💼</span>Wallet</button>
+    </nav>
+  </div>
+
+  <div id="toast" class="toast hidden" role="status"></div>
+  <script src="app.js"></script>
+</body>
+</html>
