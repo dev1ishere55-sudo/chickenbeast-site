@@ -792,6 +792,28 @@
     $("#copyRef")?.addEventListener("click", () => {
       navigator.clipboard?.writeText(refL()).then(() => toast("Link copied", "ok"));
     });
+    // Gym card share: rank + mined + referral link, to Telegram or X.
+    function gymCardText() {
+      return "🐔 I'm a " + rank().name + " on CHICKENBEAST with " + fmt(state.totalMined) +
+        " Beast Points mined. Too jacked to rug — join my coop:";
+    }
+    function openExternal(url) {
+      const inTg = !!(tg && tg.initData); // Telegram.WebApp exists in normal browsers too; initData is only set inside Telegram
+      if (inTg && url.startsWith("https://t.me/") && tg.openTelegramLink) tg.openTelegramLink(url);
+      else if (inTg && tg.openLink) tg.openLink(url);
+      else window.open(url, "_blank", "noopener");
+    }
+    $("#shareCardTg")?.addEventListener("click", () => {
+      if (!state.refCode) toast("Connect wallet to get your own referral code", "err");
+      const url = "https://t.me/share/url?url=" + encodeURIComponent(refL()) + "&text=" + encodeURIComponent(gymCardText());
+      openExternal(url);
+    });
+    $("#shareCardX")?.addEventListener("click", () => {
+      if (!state.refCode) toast("Connect wallet to get your own referral code", "err");
+      const url = "https://x.com/intent/post?text=" + encodeURIComponent(gymCardText() + " " + refL()) + "&via=ChickenBeastX";
+      openExternal(url);
+    });
+
     $("#shareRef")?.addEventListener("click", () => {
       const text = "Join me on CHICKENBEAST — too jacked to rug 🐔 " + refL();
       if (navigator.share) navigator.share({ text }).catch(() => {});
