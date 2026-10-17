@@ -773,8 +773,21 @@
     $("#disconnectWalletBtn")?.addEventListener("click", disconnect);
     $("#soundBtn")?.addEventListener("click", toggleSound);
     $("#walletChip")?.addEventListener("click", () => showScreen("wallet"));
+    // Remove the loading shimmer once each image is ready (was an inline onload, which the CSP blocks).
+    $$("img.hero-img, img.beast-img").forEach((img) => {
+      const clear = () => img.parentElement?.classList.remove("skel");
+      if (img.complete && img.naturalWidth) clear();
+      else { img.addEventListener("load", clear, { once: true }); img.addEventListener("error", clear, { once: true }); }
+    });
+
     $("#copyCa")?.addEventListener("click", () => {
-      navigator.clipboard?.writeText(CA).then(() => toast("CA copied", "ok")).catch(() => toast(CA, "ok"));
+      const btn = $("#copyCa");
+      const done = () => {
+        toast("CA copied — verify it on Solscan", "ok");
+        if (btn) { btn.textContent = "Copied ✓"; setTimeout(() => { btn.textContent = "Copy"; }, 1800); }
+      };
+      if (navigator.clipboard?.writeText) navigator.clipboard.writeText(CA).then(done).catch(() => toast(CA, "ok"));
+      else toast(CA, "ok");
     });
     $("#copyRef")?.addEventListener("click", () => {
       navigator.clipboard?.writeText(refL()).then(() => toast("Link copied", "ok"));

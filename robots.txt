@@ -12,3 +12,5 @@ Allow: /
 
 User-agent: *
 Allow: /
+
+Sitemap: https://dev1ishere55-sudo.github.io/chickenbeast-site/sitemap.xml
